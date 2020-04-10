@@ -1,0 +1,28 @@
+
+{% extends "blogs/header.html" %}
+{% block content %}
+<div class="container" style="min-height:500px">
+<div style="border-style: solid; padding:5px; border-width: medium; max-width:1000px; margin:auto;">
+<h2 style="font-size:40px; color:white;">CHECK THE ITEMS YOU WANT TO DELETE</h2>
+  <form method="post" name="forms">
+  {% csrf_token %}
+   
+    {% for i in blogs %}
+     <p>
+      <label>
+        <input type="checkbox" name="item" value={{i.id}} />
+        <span><font size=5px color="white">{{i.title|safe}}</span>
+      </label>
+    </p>
+   {% endfor %}
+     <center><button class="btn waves-effect waves-light" type="submit" name="action" id="logout">DELETE
+  
+  </button>
+  </center>
+  </form>
+       
+  </div>
+  </div>
+   {% include 'blogs/includes/footer.html' %}  
+{% endblock %}
+   

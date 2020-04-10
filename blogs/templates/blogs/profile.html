@@ -1,0 +1,54 @@
+{% extends "blogs/header.html" %}
+{% block content %}
+{% load blog_extra %}
+{% load static %}
+<div class="row container" >
+
+<div class = "col s12 m12 l12 " style="background: #71FCE9; min-height:600px; margin-bottom:25px; margin-top:25px; border: 1px solid; border-radius:5%" >
+<div class ="col s12 m6 l6" >
+<br>
+<br>
+<br>
+{% for i in details %}
+{% if i.profile_pic %}
+<img src="{{ i.profile_pic.url }}" style="height:500px; max-width:100%; border-radius:50%">
+{% endif %}
+<h5>   <i class=" material-icons inline-icon">public</i> - &nbsp;{{i.description}}
+</h5>
+{% endfor %}
+</div>
+<div class ="col s12 m6 l6" >
+
+{% for i in users %}
+<h2>{{i.first_name}} &nbsp; {{i.last_name}}
+</h2>
+
+<h5>   <i class="inline-icon material-icons">person_pin</i> - &nbsp;{{i.username}}
+</h5>
+<h5>  <i class="inline-icon material-icons">email</i> - &nbsp; {{i.email}}
+</h5>
+
+{% endfor %}
+{% for i in details %}
+<h5>   <i class="inline-icon material-icons">phone</i> - &nbsp;{{i.phone_number}}
+</h5>
+<h5>  <i class="inline-icon material-icons">face</i> - &nbsp; {{i.age}}
+</h5>
+<h5>  <i class="inline-icon material-icons">location_on</i> - &nbsp;{{i.address}}
+</h5>
+<h5>  <i class="inline-icon material-icons">map</i> - &nbsp; {{i.country}}
+</h5>
+{% endfor %}
+</div>
+<br>
+
+{% for i in users %}
+{% if i.username == user.username%}
+<center><a class="waves-effect waves-light btn red" href="/{{i.username}}/update_details"><i class="medium material-icons">add</i> update</a></center>  
+{% endif %}
+{% endfor %}
+</div>
+</div>
+
+  {% include 'blogs/includes/footer.html' %}  
+{% endblock %}

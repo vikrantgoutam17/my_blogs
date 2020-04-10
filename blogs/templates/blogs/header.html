@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+   <link href="{% static "blogs/materialize.css" %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="/static/base/js/main.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+      <script type = "text/javascript"
+         src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
+      </script> 
+    <link rel="shortcut icon" href={% static "blogs/images/logo.png" %} />
+<title>
+my_blogs</title>
+<link href="{% static "tinymce/css/prism.css" %}" rel="stylesheet">
+<style>
+
+.carousel{
+    
+    margin-top: 20px;
+}
+.carousel .item{
+    min-height: 100px; /* Prevent carousel from being distorted if for some reason image doesn't load */
+}
+.carousel .item img{
+    margin: 0 auto;
+	#99004d
+}</style>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+</head>
+<body style="zoom: 1; position: relative; min-height:100%; top: 0px;">
+
+ <nav style="padding:5px display: inline-block;">
+    <div class="nav-wrapper" >
+      <a href="#!" style="font-size:30px">&nbsp; &nbsp; &nbsp; &nbsp;myblogs</a>
+       
+      
+      
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+       {% if user.is_authenticated %}
+      <li> <a class = "dropdown-button" href = "#!" data-activates = "dropdown" ><i class="material-icons  yellow-text inline-icon">notifications</i></a>	 </li> 
+       {% if count != 0%}
+      <li><sup style="font-size:25px; color:red;">{{count}}</sup></li>
+      {% endif %}
+      {% endif %}
+      {% include 'blogs/includes/navbar.html' %}  
+      
+      </ul>
+    </div>
+    
+  </nav>
+  <ul id = "dropdown" class = "dropdown-content" >
+  {% for i in notification %}
+         <li><a href = "{{i.id}}/notify">{{i.notify|safe}}<span class = "badge"></span></a></li>
+        
+         <li class = "divider"></li>
+         
+  {% endfor %}
+      </ul>
+       <ul id = "dropdow" class = "dropdown-content" >
+  {% for i in notification %}
+         <li><a href = "{{i.id}}/notify">{{i.notify|safe}}<span class = "badge"></span></a></li>
+        
+         <li class = "divider"></li>
+         
+  {% endfor %}
+      </ul>
+   <ul class="sidenav" id="mobile-demo">
+     
+   {% include 'blogs/includes/navbar.html' %}  
+   {% if user.is_authenticated %}
+      <li> <a class = "dropdown-button" href = "#!" data-activates = "dropdow" ><i class="material-icons  yellow-text inline-icon">notifications</i>
+      {% if count != 0%}
+       <sup style="font-size:25px; color:red;">{{count}}</sup>
+       {% endif %}
+       </a>	 </li> 
+     
+      {% endif %}
+  </ul>
+  {% include 'blogs/includes/message.html' %}      
+
+    
+  {% block content %}
+  {% endblock %}
+ 
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="{% static "tinymce/js/prism.js" %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('.sidenav').sidenav();
+  })
+</script>
+<script>
+ $(document).ready(function(){
+   $('.dropdown-trigger').dropdown();
+    $('.carousel').carousel({
+      fullWidth: true,
+      duration: 100,
+      padding: 20
+    });
+    autoplay();
+function autoplay() {
+    $('.carousel').carousel('next');
+    setTimeout(autoplay, 4500);
+}
+  })
+</script>
+
+</body>
+ 
+        </html>

@@ -1,0 +1,55 @@
+{% extends "blogs/header.html" %}
+{% block content %}
+{% load blog_extra %}
+<div class="container" style="min-height:500px">
+ <div class="row" >
+  {% if user.is_authenticated %}
+   <div class="row" >
+   
+   {% for i in blogs %}
+   
+    <div class="col s12 m6 l4">
+      <div class="card "  style="height:250px;  border-radius:5%; padding:5px"  >
+                <div style="  height:40px; overflow-y: scroll; paddind:5px; margin:5px;  text-overflow: ellipsis;"> <span class="card-title" ><i class="tiny material-icons">person</i> <font size=3px>&nbsp;<a href="{{ i.user }}/profile">{{ i.user }}</a></font> &nbsp; &nbsp;<font size=1px>{{i.pub_date}}</font>  </span></div>
+        <div class="card-content white-text" style=" background-color:{{i.back}}; height:120px; overflow-y: scroll;   text-overflow: ellipsis;">
+        <center><font size=2px>{{i.title|safe}}</font></center>
+          <p>{{i.content|safe}}</p>
+        </div>
+        <div class="card-action" style="  height:60px;  paddind:5px; margin:5px;  text-overflow: ellipsis;">
+        <font size=2px>&nbsp; &nbsp;<a href="/{{i.id}}/likes"  >{{likes|keyvalue:i.id}} &nbsp; likes</a>
+       <font>
+         {% if i.user == user%}
+       <font size=1.5px> &nbsp; &nbsp;<a href="/{{i.id}}/update"  id="edit">edit</a>
+         &nbsp; &nbsp;<a href="/{{i.id}}/delete"  id="delete">delete</a>
+         </font>
+         {% endif %}
+         <br>
+         {% if user.username in users|keyvalue:i.id%}
+         <a href="/{{i.id}}/dislike" >   &nbsp; &nbsp;<i class="small material-icons red-text" >favorite</i></a>
+          {% else %}
+          <a href="/{{i.id}}/like" >   &nbsp; &nbsp;<i class="small material-icons yellow-text " >favorite</i></a>
+         {% endif %}
+        </div>
+      </div>
+    </div>
+  
+    {% endfor %}
+    
+  </div>
+  </div>
+  </div>
+  {% else %}
+ {% include 'blogs/includes/crousel.html' %}  
+    
+  </div>
+  </div>
+
+  {% endif %}   
+  
+  {% include 'blogs/includes/footer.html' %}  
+{% endblock %}
+  
+
+  
+
+   

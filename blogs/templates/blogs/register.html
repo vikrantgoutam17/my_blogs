@@ -1,0 +1,41 @@
+{% extends "blogs/header.html" %}
+{% block content %}
+<br>
+<div class="container" style="min-height:500px">
+<div style="border-style: solid; padding:5px; border-width: medium; max-width:1000px; margin:auto;">
+<h2 style="font-size:40px; color:white;">Fill Your Details</h2>
+  <div class="row"  align="left">
+    <form class="col s12"  method="POST">
+      {% csrf_token %}
+        {% for field in form %}
+          <div class="row">
+          {% if forloop.counter <= 2 %}
+            <div class="input-field col s6">
+          {% else %}
+            <div class="input-field col s12">
+          {% endif %}
+         
+            <lable for="{{ field.id_for_lable }}" class="lable" style="font-size:20px; color:white;">{{field.html_name}}</lable>
+<small style="color: grey">{{ field|safe }}</small>          
+    </div>
+     {% if forloop.counter >= 2 %}
+    </div>
+      {% endif %}
+    
+{% endfor %}
+
+
+ <center><button class="btn waves-effect waves-light" type="submit" name="action">Register
+  
+  </button>
+  </center>
+  <br>
+</form>
+</div> 
+</div>
+</div>
+<p style="font-size:20px; color:white">if you already have an account <a href="/login"> login </a> instead.
+</p>
+</div>
+ {% include 'blogs/includes/footer.html' %}  
+{% endblock %}

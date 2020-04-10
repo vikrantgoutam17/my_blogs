@@ -1,0 +1,40 @@
+{% extends "blogs/header.html" %}
+{% block content %}
+{% load blog_extra %}
+<div class="container" style="min-height:500px; margin-top:25px; margin-bottom:25px; color:white; border: 2px solid; border-radius:5%">
+ 
+  {% if user.is_authenticated %}
+
+   <h1 >
+   These users have liked this Blog</h1>
+   <br>
+   <div class="row" >
+   {% for i in blogs %}
+    {% for j in uu %}
+    {% if j.user == i.user%}
+    <div class="col s6 m4 l2" style=" margin-bottom: 25px; margin-top: 25px;">
+    <img src="{{ j.profile_pic.url }}" style="height:50px; max-width:50%; border-radius:50%">
+    {% endif %}
+    {% endfor %}
+  &nbsp;
+    <a href="/{{i.user}}/profile" ><font size=3px style="color:white;"> {{i.user}}</font></a>
+</div>
+  
+    {% endfor %}
+    </div>
+  </div>
+  
+  {% else %}
+ {% include 'blogs/includes/crousel.html' %}  
+    
+ 
+  </div>
+
+  {% endif %}   
+  {% include 'blogs/includes/footer.html' %}  
+{% endblock %}
+  
+
+  
+
+   

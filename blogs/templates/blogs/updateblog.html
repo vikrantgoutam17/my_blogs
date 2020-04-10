@@ -1,0 +1,50 @@
+
+{% extends "blogs/header.html" %}
+
+{% block content %}
+{% load static %}
+
+<br>
+<div class="row" style="min-height:500px" >
+<div  div class="input-field col s3 m3 l3"></div>
+<div  div class="input-field col s6 m6 l6" style="border-style: solid; padding:5px; border-width: medium; max-width:1000px; margin:auto; display: inline-block;" align="center">
+<h2 style="font-size:40px; color:white;">whats on your mind</h2>
+
+  <div class="row"  align="center">
+    <form class="col s12 m12 l12"  method="POST">
+      {% csrf_token %}
+        {% for field in form %}
+          <div class="row"  align="center">
+          
+            <div class="input-field col s12 m12 l12">
+        
+         
+            <lable for="{{ field.id_for_lable }}" class="lable" style="font-size:20px; color:white;">{{field.html_name}}</lable>
+            <br>
+{{form.media}}
+{{ field }}          
+    </div>
+     
+    </div>
+      
+    
+{% endfor %}
+
+
+
+ <center><button class="btn waves-effect waves-light" type="submit" name="action">Update Blog
+  
+  </button>
+  </center>
+  <br>
+</form>
+</div> 
+</div>
+<div  div class="input-field col s3 m3 l3"></div>
+</div>
+ 
+
+ {% include 'blogs/includes/footer.html' %}  
+  
+{% endblock %}
+   
